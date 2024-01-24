@@ -1,0 +1,13 @@
+# Process Authenticator startup
+service proca /system/bin/pa_daemon
+    class core
+    user system
+    group system
+    disabled
+
+on boot
+    mkdir /dev/.pa
+    chmod 0711 /dev/.pa
+    chown system system /dev/.pa
+    restorecon -R /dev/.pa
+    start proca
